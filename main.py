@@ -14,17 +14,6 @@ clock = pygame.time.Clock()
 pygame.mixer.init()
 Ooo = pygame.mixer.Sound("Ooo.wav")
 
-def attack():
-    Attack = randint(1, 5)
-    if Attack==1:
-        while leg_1.rect.y  != 500:
-            leg_1.height += 5
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-
-            pygame.display.update()
-            clock.tick(60)
 
 class Area:
     def __init__(self, x, y, width, height, color):
@@ -121,10 +110,10 @@ class Heart(GameSprite):
         return True in wall_touch
 
 
-leg_1 = GameSprite("ATTACKS/Leg.png", 58, 47, 0, 361, 300)
-leg_2 = GameSprite("ATTACKS/Leg.png", 500, 500, 0, 361, 800)
-leg_3 = GameSprite("ATTACKS/Leg.png", 500, 500, 0, 361, 800)
-legs = [leg_1, leg_2, leg_3]
+knife_1 = GameSprite("ATTACKS/Leg.png", 58, -754, 0, 361, 800)
+knife_2 = GameSprite("ATTACKS/Leg.png", 500, 500, 0, 361, 800)
+knife_3 = GameSprite("ATTACKS/Leg.png", 500, 500, 0, 361, 800)
+knifes = [knife_1, knife_2, knife_3]
 
 putin_map = GameSprite("putin_map.png", 647, 222, 0, 21, 21)
 bg = GameSprite("bg.png", 0, 0, 0, 1366, 768)
@@ -218,8 +207,24 @@ while True:
         battle_screen.reset()
         heart.reset()
         heart.move(walls)
-        leg_1.reset()
-        attack()
+
+        rand_att = randint(1, 7)
+        if rand_att == 1:
+            while knife_1.rect.y != 46:
+                battle_screen.reset()
+                knife_1.rect.y += 10
+                knife_1.reset()
+                print(knife_1.rect.y)
+
+                heart.reset()
+                heart.move(walls)
+
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+
+                pygame.display.update()
+
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
